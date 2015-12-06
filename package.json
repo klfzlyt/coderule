@@ -7,6 +7,8 @@
   },
   "dependencies": {
     "express": "3.2.6",
-    "ejs": "*"
+    "ejs": "*",
+    "async": "0.1.x",
+    "mongodb": "1.2.x"
   }
 }

@@ -2,10 +2,13 @@
 	"id":1,
 	"text":"01",
 	"rule":[],
+	"isClass":true,
+	"iconCls":"icon-file",
 	"children":[
 	{
 		"id":11,
 		"text":"11",
+		"isClass":false,
 		"rule":[{
 			"name":"fix",
 			"data":{
@@ -56,6 +59,7 @@
 	{
 		"id":112,
 		"text":"111111",
+		"isClass":false,
 		"rule":[{
 			"name":"fix",
 			"data":{

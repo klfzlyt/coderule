@@ -5,25 +5,92 @@ function append_slingber() {
 		parent: (node ? $(node.target).parents('li').eq(1).children('div').first() : null),
 		data: [{
 			text: '新条目',
-			rule: []
+			rule: [],
+			isClass:false
 		}]
 	});
 }
+function append_slingber_class() {
+	var t = $('#tt');
+	var node = t.tree('getSelected');
+	var parents_arr=$('#tt').tree('getparents',{node:node});
+	var result_temp=[];
+	for(var i=0;i<parents_arr.length;i++){
+		
+		result_temp.push(parents_arr[i].id)
+	}
+	var thisnode={};
+	thisnode.depth=result_temp.length+1;
+	thisnode.name='新类别';
+	thisnode.parents=result_temp;
+	var jstr=JSON.stringify(thisnode);
+	put_method('/addclass',jstr,function(str){
+		t.tree('append', {
+			parent: (node ? $(node.target).parents('li').eq(1).children('div').first() : null),
+			data: [{
+				id:str,
+				text: '新类别',
+				rule: [],
+				isClass:true
+			}]
+		});		
+	});
+}
+function put_method(url,datastr,cb){
+    $.ajax({
+        type: "PUT",
+        url: url,
+        contentType: 'application/json',    // request payload type
+        "content-type": "application/json",   // what we want back
+        data: datastr,
+        success: cb
+    });
+}
+function append_class() {
+	var t = $('#tt');
+	var node = t.tree('getSelected');
+	var parents_arr=$('#tt').tree('getparents',{node:node});
+	var result_temp=[];
+	for(var i=0;i<parents_arr.length;i++){
+		//if(parents_arr[i].isClass)
+		result_temp.push(parents_arr[i].id)
+	}
+	
+		result_temp.push(node.id);
 
+	var thisnode={};
+	thisnode.depth=result_temp.length+1;
+	thisnode.name='新类别';
+	thisnode.parents=result_temp;
+	var jstr=JSON.stringify(thisnode);
+	put_method('/addclass',jstr,function(str){
+	t.tree('append', {
+		parent: (node ? node.target : null),
+		data: [{
+			id:str,
+			text: '新类别',
+			rule: [],
+			isClass:true
+		}]
+	});
+	});
+}
 function append() {
 	var t = $('#tt');
 	var node = t.tree('getSelected');
 	t.tree('append', {
 		parent: (node ? node.target : null),
 		data: [{
-			text: '新条目',
-			rule: []
+			text: '新规则',
+			rule: [],
+			isClass:false
 		}]
 	});
 }
 
 function removeit() {
 	var node = $('#tt').tree('getSelected');
+	if(node.isClass)return;
 	$('#tt').tree('remove', node.target);
 	var tab = $('#tt').data('tree').options.tabs;
 	var input_number = $('#tt').data('tree').options.input_number;
@@ -85,7 +152,7 @@ function expand() {
 		},
 		onAfterEdit: function(node) {
 
-			alert(node.text);
+			//alert(node.text);
 		},
 		onUpdate_rule: function(node) {
 			var rule = node.rule;
@@ -94,15 +161,19 @@ function expand() {
 		},
 		//pram:oldnode 上次选中的node
 		//pram:newnode 本次选中的node
+		//当选中改变时，要切换从新生成tabcontent
 		onSelect_old: function(oldnode, newnode) {
 			var ob = $(this);
+			
 			ob.tree('update_node', {
 				node: oldnode
 			});
+			if(newnode.isClass)return;
 			var $tab_main = $.ajax({
 				url: "./tabcontent.html",
 				async: false
 			}).responseText;
+			//每次切换都要请求一次
 			$tab_main = $tab_main.replace('none', 'block');
 			var tab = ob.data('tree').options.tabs;
 			var input_number = ob.data('tree').options.input_number;
@@ -168,6 +239,7 @@ function expand() {
 			var node = param.node;
 			//如果没有rule return 有rule的话一定是[]
 			if (!node.rule) return;
+			if(node.isClass)return;
 			var tab = ob.data('tree').options.tabs;
 			var input_number = ob.data('tree').options.input_number;
 			var tabs_rules = tab.tabs('get_rules');

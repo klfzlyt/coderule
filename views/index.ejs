@@ -22,8 +22,24 @@
 				<div class="easyui-panel" style="padding:5px">
 					<ul id="tt" class="easyui-tree" ></ul>
 					<div id="mm" class="easyui-menu" style="width:120px;">
-						<div onclick="append_slingber()" data-options="iconCls:'icon-add'">同一级增加</div>
-						<div onclick="append()" data-options="iconCls:'icon-add'">下一级增加</div>
+						<div data-options="iconCls:'icon-add'">
+							
+							<span>同一级增加</span>
+							<div style="width: 150px;">
+								
+									<div onclick="append_slingber_class()">类别</div>
+									<div onclick="append_slingber()">规则</div>								
+								
+							</div>
+						</div>
+						<div data-options="iconCls:'icon-add'">							
+							<span>下一级增加</span>
+							<div style="width: 150px;">
+								<div onclick="append_class()">类别</div>
+								<div onclick="append()">规则</div>
+								
+							</div>
+						</div>
 						<div onclick="removeit()" data-options="iconCls:'icon-remove'">移除</div>
 						<div class="menu-sep"></div>
 						<div onclick="expand()">展开</div>
@@ -95,8 +111,10 @@
 //				});
 
 				$('#add_btn').bind('click', function(e) {
+					//这里要判断能不能加规则，如果是类别，就不能加									
 					e.preventDefault();
-					e.stopPropagation();				
+					e.stopPropagation();
+					if($('#tt').tree('getSelected').isClass)return;
 					$('#test1234').tabnumber('add_Item', {});
 					$('#table_tab').tabs('add_content', {						
 						content: $tab_main,
@@ -108,6 +126,7 @@
 				$('#delete_btn').bind('click', function(e) {
 					e.preventDefault();
 					e.stopPropagation();
+					if($('#tt').tree('getSelected').isClass)return;
 					var length = $('#test1234').tabnumber('get_length', {});
 					$('#test1234').tabnumber('remove_Item', {});
 					$('#table_tab').tabs('close', length - 1);
