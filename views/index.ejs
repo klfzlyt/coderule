@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="keywords" content="jquery,ui,easy,easyui,web">
+		<meta name="description" content="easyui help you build your web page easily!">
+
+		<link rel="stylesheet" type="text/css" href="css/easyui.css">
+		<link rel="stylesheet" type="text/css" href="css/icons.css">
+		<link rel="stylesheet" href="css/layout.css" />
+	</head>
+	<script language="javascript" type="text/javascript" src="js/jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="js/easyui.js"></script>
+
+	<body>
+
+		<div class="easyui-layout" style="width:100%;height:550px;">
+			<div data-options="region:'west'" title="rule_tree" style="width:30%;padding:10px">
+				<div class="easyui-panel" style="padding:5px">
+					<ul id="tt" class="easyui-tree" ></ul>
+					<div id="mm" class="easyui-menu" style="width:120px;">
+						<div onclick="append_slingber()" data-options="iconCls:'icon-add'">同一级增加</div>
+						<div onclick="append()" data-options="iconCls:'icon-add'">下一级增加</div>
+						<div onclick="removeit()" data-options="iconCls:'icon-remove'">移除</div>
+						<div class="menu-sep"></div>
+						<div onclick="expand()">展开</div>
+						<div onclick="collapse()">收缩</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div data-options="region:'center'" title="">
+				<div class="easyui-layout" data-options="fit:true">
+					<div data-options="region:'north',fit:true" id="number_content">
+						<div style="height: 400px; width: 100%;" class="easyui-panel" title="test" data-options="iconCls:'icon-help',closable:false,tools:'#tt1',toolPosition:'left'">
+							<div id="tt1">
+								<a href="javascript:void(0)" class="icon-add" id="add_btn" style="margin-left: 20px;"></a>
+								<a href="javascript:void(0)" class="icon-remove" id="delete_btn" style="margin-left: 20px;"></a>
+							</div>
+							<div id="test1234" class="clearfix"></div>
+						</div>
+					</div>
+
+					<div data-options="region:'south'" split="true" border="true" style="height:360px;">
+						<div id="table_tab" class="easyui-tabs" style="width:100%;height:350px"></div>
+					
+					</div>
+					
+					
+				</div>
+			</div>
+				
+
+		</div>
+	
+		<script language="javascript" type="text/javascript" src="js/boot.js"></script>
+		<script language="javascript" type="text/javascript" src="js/tabs.js"></script>
+		<script language="javascript" type="text/javascript" src="js/tabnumber.js"></script>
+		<script language="javascript" type="text/javascript" src="js/tree.js"></script>
+		<script type="text/javascript" src="js/init.js" ></script>
+		<script language="javascript" type="text/javascript">
+			$(document).ready(function() {
+				selected_index = 0;				
+				var $tab_main = $.ajax({
+				  url: "tabcontent.html",
+				  async: false
+				}).responseText; 
+				$tab_main=$tab_main.replace('none','block');	
+				
+				
+//				$('#table_tab').tabs({
+//					fit: true,
+//					onSelect: function(title, index12) {
+//						$('#test1234').tabnumber('set_active', {
+//							index: index12
+//						});
+//					},
+//					onupdate_content:function(setting){
+//						var changed_object=this;
+//						console.log("index: "+setting.index+" selecttype:"+setting.data.type+" datavaule: "+setting.data.value);
+//					}
+//				});
+//				$('#test1234').tabnumber({
+//					width: 400,
+//					onclick: function(e) {
+//						$('#table_tab').tabs('select', e);
+//					},
+//					onupdate:function(e){
+//						console.log("index: "+e.index+" value: "+e.value);
+//					}
+//				});
+
+				$('#add_btn').bind('click', function(e) {
+					e.preventDefault();
+					e.stopPropagation();				
+					$('#test1234').tabnumber('add_Item', {});
+					$('#table_tab').tabs('add_content', {						
+						content: $tab_main,
+						closable: false,
+						selected: true
+					});
+				
+				});
+				$('#delete_btn').bind('click', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					var length = $('#test1234').tabnumber('get_length', {});
+					$('#test1234').tabnumber('remove_Item', {});
+					$('#table_tab').tabs('close', length - 1);
+				});
+				$('#number_content').bind('click', function(e) {
+					e.stopPropagation();
+					$('#test1234').tabnumber('set_active', {});
+				});
+			})
+		</script>
+
+
+
+
+		<script>
+//						var editIndex = undefined;
+//			
+//						function endEditing() {
+//							if (editIndex == undefined) {
+//								return true
+//							}
+//							if ($('#dg_' + (index1)).datagrid('validateRow', editIndex)) {
+//								var ed = $('#dg_' + (index1)).datagrid('getEditor', {
+//									index: editIndex
+//								});
+//								//var productname = $(ed.target).combobox('getText');
+//								//$('#dg_'+index).datagrid('getRows')[editIndex]['productname'] = productname;
+//								$('#dg_' + (index1)).datagrid('endEdit', editIndex);
+//								editIndex = undefined;
+//								return true;
+//							} else {
+//								return false;
+//							}
+//						}
+//			
+//						function onClickRow(index) {
+//							if (editIndex != index) {
+//								if (endEditing()) {
+//									$('#dg_' + (window.index1)).datagrid('selectRow', index)
+//										.datagrid('beginEdit', index);
+//									editIndex = index;
+//								} else {
+//									$('#dg_' + (window.index1)).datagrid('selectRow', editIndex);
+//								}
+//							}
+//						}
+//			
+//						function appendrow() {
+//							console.log(index1)
+//							if (endEditing()) {
+//								$('#dg_' + (index1)).datagrid('appendRow', {});
+//								editIndex = $('#dg_' + (index1)).datagrid('getRows').length - 1;
+//								$('#dg_' + (index1)).datagrid('selectRow', editIndex)
+//									.datagrid('beginEdit', editIndex);
+//							}
+//						}
+//			
+//						function removeitrow() {
+//							if (editIndex == undefined) {
+//								return
+//							}
+//							$('#dg_' + (index1)).datagrid('cancelEdit', editIndex)
+//								.datagrid('deleteRow', editIndex);
+//							editIndex = undefined;
+//						}
+//			
+//						function acceptrow() {
+//							if (endEditing()) {
+//								$('#dg_' + (index1)).datagrid('acceptChanges');
+//							}
+//						}
+//			
+//						function rejectrow() {
+//							$('#dg_' + (index1)).datagrid('rejectChanges');
+//							editIndex = undefined;
+//						}
+//			
+//						function getChanges() {
+//							var rows = $('#dg_' + (index1)).datagrid('getChanges');
+//							alert(rows.length + ' rows are changed!');
+//						}
+		</script>
+	</body>
+
+	</html>

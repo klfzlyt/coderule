@@ -1,0 +1,43 @@
+.digital_Container {
+	 width: 180px;
+    cursor: text;
+    background: #fff;
+    outline: none;
+    position: relative;
+    
+    height: 29px;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+    margin:0 10px
+}
+.digital_Container b{
+	display: block;
+	margin-left: 10px;
+	font-size:20px;
+	width: 19px;
+	height: 29px;
+}
+.digital_Container input{
+	
+	background-color: transparent;
+	position:absolute;
+	margin-left: -999px;
+} 
+.digital {
+    float: left;
+    display: block;
+    line-height: 0.7;
+    
+    border-left: 1px solid #cccccc;
+}
+
+.active{
+	background: url(../img/cursor.gif) no-repeat 23px -8px;
+	
+}
+.centeractive{
+	background: url(../img/cursor.gif) no-repeat 13px -8px;
+	
+}
+.clearfix:after{content:'';clear:both;zoom: 1;display: block;}
+.ttttt{border: 1px solid #000;}
