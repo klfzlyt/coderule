@@ -26,6 +26,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+if(process.env.VCAP_SERVICES)
+{
+    console.log(process.env.VCAP_SERVICES);
+    
+}
+
+
 
 app.get('/', routes.index);
 app.get('/users', user.list);
