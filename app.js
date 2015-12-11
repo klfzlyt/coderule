@@ -13,6 +13,12 @@ var express = require('express')
   , rule_route=require('./routes/rule_Magager.js')
   , ruleClass_route=require('./routes/Rule_Class.js');
 
+
+
+
+
+
+
 var app = express();
 
 // all environments
