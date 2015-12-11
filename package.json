@@ -7,6 +7,11 @@
   },
   "dependencies": {
     "express": "3.2.6",
-    "ejs": "*"
+    "ejs": "*",
+   
+    "mongodb": "1.2.x",
+    
+    "mongoose":"*",
+    "async": "1.5.x"
   }
 }
