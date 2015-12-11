@@ -18,7 +18,7 @@ var db = new Db('coderule',
                            { auto_reconnect: true,
                              poolSize: ps}),
                 { w: 1 });
-console.log(port);
+//console.log(port);
 /**
  * Currently for initialisation, we just want to open
  * the database.  We won't even attempt to start up
@@ -39,12 +39,21 @@ exports.init = function (callback) {
 
         function (class_coll, cb) {
             exports.class_M = class_coll;
-           // db.collection("photos", cb);
-            callback(null);
+            db.collection("regulation", cb);
+            
+        },
+        function(rule,cb){
+        	exports.rule_M=rule;
+        	db.collection('data',cb);
+        },              
+        function(rule_data,cb){
+        	exports.rule_data_M=rule_data;
+        	cb(null);
         }
     ], callback);
 };
 exports.class_M = null;
-
+exports.rule_data_M=null;
+exports.rule_M=null;
 
 

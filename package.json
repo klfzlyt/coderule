@@ -8,7 +8,10 @@
   "dependencies": {
     "express": "3.2.6",
     "ejs": "*",
-    "async": "0.1.x",
-    "mongodb": "1.2.x"
+   
+    "mongodb": "1.2.x",
+    
+    "mongoose":"*",
+    "async": "1.5.x"
   }
 }

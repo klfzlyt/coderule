@@ -1,6 +1,8 @@
 var db=require('./db.js'),
-	async=require('async');
-
+	async=require('async'),
+	helper=require('../handlers/helper.js'),
+	mongoose = require('mongoose');
+	
 
 exports.createClass=function(data,callback){
 	async.waterfall([
@@ -33,4 +35,52 @@ exports.createClass=function(data,callback){
 							if(err)callback({});
 							else callback(null,result);		
 								});
+};
+
+exports.updateClass=function(data,callback){
+	var id = mongoose.Types.ObjectId(data.id);
+	async.waterfall([
+	                 	function(cb){
+	                 	cb(null,data);	
+	                 	},
+	                 	function(updata_data,cb){
+	                 	db.class_M.update({_id:id},{$set:{name:updata_data.text,update_date:helper.getTime(),children_length:updata_data.children_length}},cb);
+	                 	}	                 	               	               
+	                 ],function(err,result){
+							if(err){
+								console.log('upate_class_name_err');
+							}
+							else{
+								callback(null,result);
+							}
+								
+		
+			}
+		);
+	
+};
+
+exports.deleteClass=function(data,callback){
+	var id = mongoose.Types.ObjectId(data.id);
+	async.waterfall([
+	                 	function(cb){
+	                 		
+	                 		//     		
+	                 		if(!data.isClass)cb({err:'not class'});
+	                 		db.class_M.remove({_id:id},function(err,result){
+	                 			cb(null,result);
+	                 			
+	                 		});	                 			                 	
+	                 	}
+	                 
+	                 
+	                 ],function(err,result){
+								if(err)callback(err);
+								callback(null,result);
+		
+							
+							});
+		
+	
+	
 };

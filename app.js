@@ -9,7 +9,9 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , db=require('./data/db.js')
-  , class_route=require('./routes/class_Magange.js');
+  , class_route=require('./routes/class_Magange.js')
+  , rule_route=require('./routes/rule_Magager.js')
+  , ruleClass_route=require('./routes/Rule_Class.js');
 
 var app = express();
 
@@ -37,6 +39,11 @@ app.get('/tab',function(req,res){
 //	var ss=1;
 });
 app.put('/addclass',class_route.createClass);
+app.put('/addrule',rule_route.createRule);
+app.post('/updateclass',class_route.updateClass);
+app.post('/updaterule',rule_route.updateRule);
+app.post('/deleteNode',ruleClass_route.deleteNode);
+app.get('/getall.json',ruleClass_route.getClassRuleJSON);
 db.init(function(err,result){
     if (err) {
     	console.log('errr');
