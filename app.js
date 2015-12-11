@@ -30,6 +30,8 @@ if(process.env.VCAP_SERVICES)
 {
     console.log(process.env.VCAP_SERVICES);
     
+    
+    
 }
 
 
