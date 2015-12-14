@@ -1,0 +1,83 @@
+//14:12
+/*
+ * 全局样式
+ * 
+ */
+.float(@direction:left){
+    float:@direction;
+}
+.display(@name){
+    display: @name;
+}
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+.clearfix {
+  display: block;
+  zoom: 1;
+  &:after {
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+/*
+ * 主要区域上部 tabnumber
+ * 
+ */
+#test1234{
+    margin-top:40px;
+    
+    .hovercontainer{
+            margin-left: 20px;    
+            .float(left);
+            margin-top: 10px;
+        }
+    .digital_Container {
+             width: 180px;
+            cursor: text;
+            background: #fff;
+            outline: none;
+            position: relative;
+            
+            height: 29px;
+            border: 1px solid #cccccc;
+            border-radius: 2px;
+            margin:0 10px
+        }
+    .digital_Container b{
+            display: block;
+            margin-left: 10px;
+            font-size:20px;
+            width: 19px;
+            height: 29px;
+        }
+    .digital_Container input{    
+            background-color: transparent;
+            position:absolute;
+            margin-left: -999px;
+        } 
+    .digital {
+            float: left;
+            display: block;
+            line-height: 0.7;    
+            border-left: 1px solid #cccccc;
+         }
+
+    .active{
+             background: url(../img/cursor.gif) no-repeat 23px -8px;
+    
+         }
+    .centeractive{
+            background: url(../img/cursor.gif) no-repeat 13px -8px;        
+         }
+    .ttttt{border: 1px solid #000;}               
+}
+
+
+

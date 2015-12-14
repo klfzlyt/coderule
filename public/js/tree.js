@@ -1,3 +1,27 @@
+function post_method(url,datastr,cb){
+	   $.ajax({
+	        type: "POST",
+	        url: url,
+	        contentType: 'application/json',    // request payload type
+	        "content-type": "application/json",   // what we want back
+	        data: datastr,
+	        success: cb
+	    });
+}
+
+
+function put_method(url,datastr,cb){
+    $.ajax({
+        type: "PUT",
+        url: url,
+        contentType: 'application/json',    // request payload type
+        "content-type": "application/json",   // what we want back
+        data: datastr,
+        success: cb
+    });
+}
+
+
 function append_slingber() {
 	var t = $('#tt');
 	var node = t.tree('getSelected');
@@ -131,7 +155,7 @@ function removeit() {
 	if(node.children.length!=0)return;		
 	var nodestr=JSON.stringify(node);
 	post_method('/deleteNode',nodestr,function(res){
-		if(res=='ok')
+		if(res==='ok')
 		{
 			var temp=node.target;
 			var parent=t.tree('getParent',temp);
@@ -148,28 +172,7 @@ function removeit() {
 	});	
 
 }
-function post_method(url,datastr,cb){
-	   $.ajax({
-	        type: "POST",
-	        url: url,
-	        contentType: 'application/json',    // request payload type
-	        "content-type": "application/json",   // what we want back
-	        data: datastr,
-	        success: cb
-	    });
-}
 
-
-function put_method(url,datastr,cb){
-    $.ajax({
-        type: "PUT",
-        url: url,
-        contentType: 'application/json',    // request payload type
-        "content-type": "application/json",   // what we want back
-        data: datastr,
-        success: cb
-    });
-}
 function collapse() {
 	var node = $('#tt').tree('getSelected');
 	$('#tt').tree('collapse', node.target);
@@ -179,9 +182,10 @@ function expand() {
 	var node = $('#tt').tree('getSelected');
 	$('#tt').tree('expand', node.target);
 }
-(function($) {
+(function($) {	
+	//初始化的json
 
-
+	
 	var json_str = $.ajax({
 		url: "./getall.json",
 		async: false
@@ -227,7 +231,7 @@ function expand() {
 			var ob = $(this);
 			ob.data('tree').options.lastselect_node = ob.data('tree').options.currentnode;
 			ob.data('tree').options.currentnode = node;
-			if (node == ob.data('tree').options.lastselect_node) return;
+			if (node === ob.data('tree').options.lastselect_node) return;
 			ob.data('tree').options.onSelect_old.call(this, ob.data('tree').options.lastselect_node, node);
 		},
 		onAfterEdit: function(node) {
@@ -247,13 +251,15 @@ function expand() {
 			ob.tree('update_node', {
 				node: oldnode
 			});
+			var tab;
+			var lastselected_indexx=ob.data('tree').options.input_number.data('tabnumber').selected_Index;
 			if(newnode.isClass){			
-				var tab =ob.data('tree').options.tabs;
+				tab =ob.data('tree').options.tabs;
 				tab.tabs('close_all');
 				ob.data('tree').options.input_number.tabnumber('clear_all');
 				return;
 			}
-			var tab = ob.data('tree').options.tabs;
+			tab = ob.data('tree').options.tabs;
 			var input_number = ob.data('tree').options.input_number;
 			tab.tabs('close_all');
 			input_number.tabnumber('clear_all');
@@ -267,6 +273,12 @@ function expand() {
 					data: noderule[i]
 				});
 			}
+			if(lastselected_indexx===undefined)return;
+			console.log(lastselected_indexx);
+			$('#table_tab').tabs('select', lastselected_indexx);
+			//获得 以前选中的index，重新选中
+			//var selected_index=input_number.data('tabnumber').selected_Index;
+		//	console.log("selected_index: ",selected_index);
 
 		}
 	});
@@ -287,7 +299,7 @@ function expand() {
 			var result=[];
 			//循环调用$('#tt').tree('getParent',selected.target)
 			targetnode=ob.tree('getParent',targetnode.target);
-			if(targetnode==null)return [];
+			if(targetnode===null)return [];
 			//result.unshift(targetnode);
 			while(targetnode){				
 				result.unshift(targetnode);			
@@ -302,8 +314,8 @@ function expand() {
 			var result = [];
 			//回溯法递归获得
 			function backtrace(root, target, ans) {
-				if (root == undefined) return false;
-				if (root == target) {
+				if (root === undefined) return false;
+				if (root === target) {
 					return true;
 				}
 				for (var i = 0; i < root.children.length; i++) {
@@ -332,11 +344,12 @@ function expand() {
 			var node = param.node;
 			//如果没有rule return 有rule的话一定是[]
 		//	if (!node.rule) return;		
-			if(node==null){return;}
+			if(node===null){return;}
 			node.children_length=node.children?node.children.length:0;
+			var jstr;
 			if(node.isClass){
 				//var temp=$.extend(true,{},node);							
-				var jstr=JSON.stringify(node);
+				jstr=JSON.stringify(node);
 				post_method('./updateclass',jstr,function(str){
 					//alert(str);
 				});
@@ -353,25 +366,25 @@ function expand() {
 				objec_temp.data = {};
 				objec_temp.data.length = input_rules[i];
 				objec_temp.data.content = {};
-				if (objec_temp.name == 'fix') {
+				if (objec_temp.name === 'fix') {
 					objec_temp.data.content.value = tabs_rules[i].data;
 				}
-				if (objec_temp.name == 'dic') {
+				if (objec_temp.name === 'dic') {
 					objec_temp.data.content.value = tabs_rules[i].data;
 
 				}
-				if (objec_temp.name == 'flu') {
+				if (objec_temp.name === 'flu') {
 					objec_temp.data.content.value = {};
 					objec_temp.data.content.value.type = "";
 					objec_temp.data.content.value.content = tabs_rules[i].data;
 				}
-				if (objec_temp.name == 'custom') {
+				if (objec_temp.name === 'custom') {
 
 				}
 				new_arr.push(objec_temp);
 			}
 			node.rule = new_arr;
-			 jstr=JSON.stringify(node);			
+			jstr=JSON.stringify(node);			
 				post_method('./updaterule',jstr,function(str){
 					//alert(str);
 				});								

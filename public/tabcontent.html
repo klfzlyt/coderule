@@ -38,7 +38,7 @@
 				singleSelect: true,
 				toolbar: '#tb',
 				onClickRow:function(index){
-					console.log('editindex: '+editIndex+' click_index: '+index);
+				//	console.log('editindex: '+editIndex+' click_index: '+index);
 										if (editIndex != index) {
 							if (endEditing()) {
 								$('#dg').datagrid('selectRow', index)
@@ -77,8 +77,8 @@
 		</div>
 		<script type="text/javascript">
 			function tabcontent_script(container) {
-				console.log('this: ' + this);
-				console.log(container);
+			//	console.log('this: ' + this);
+			//	console.log(container);
 				$('#tab_content>div').hide();
 				$('#cc').combo({
 					required: false,

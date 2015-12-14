@@ -42,7 +42,8 @@
 			var param = $.extend({
 				activeclassName: 'ttttt',
 				length: 1,
-				index: indexx
+				index: indexx,
+				hovercontainercssname:'hovercontainer'
 			}, setting);
 			if (param.length <= 0) return;
 			var THIs = this;
@@ -57,6 +58,7 @@
 
 				}).bind('click', function(e) {
 					///callback
+				//	console.log('container click');
 					e.preventDefault();
 					e.stopPropagation();
 					var childrens = THIs.children("div.Item").removeClass(param.activeclassName);
@@ -69,7 +71,7 @@
 					}
 				});
 			var numberinput = $('<div></div>').appendTo(container);
-			var hover_container = $('<div style="margin-left: 20px;"></div>').appendTo(container).hide();
+			var hover_container = $('<div></div>').appendTo(container).hide().addClass(param.hovercontainercssname);
 			var numberinput_1 = $.fn.numberinput.number_input({
 				render_To: numberinput,
 				number_of_input: param.length,
@@ -109,10 +111,12 @@
 			var THIS = this;
 			var param = $.extend({
 				index: 0,
-				activeclassName: 'ttttt'
+				activeclassName: 'ttttt',
+				raise_event:true
 			}, setting);
 			var childrens = THIS.children("div.Item").removeClass(param.activeclassName);
 			$(childrens[param.index]).addClass(param.activeclassName);
+			if(param.raise_event)
 			THIS.data('tabnumber').onclick.call(THIS, param.index);
 		},
 		get_selected: function(setting) {
