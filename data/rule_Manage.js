@@ -69,8 +69,6 @@ exports.updateRule = function(data, callback){
 			//db.rule_M.update({_id:id},{:{name:data.text,update_date:helper.getTime(),rule:[]}},cb);
 				//TODO
 				console.log(results);
-			
-				
 				db.rule_M.update({_id:id},{$set:{name:data.text,update_date:helper.getTime(),rule:results}},function(err,reuslt){
 					
 					console.log("update_result: "+reuslt);

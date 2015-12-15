@@ -11,8 +11,10 @@
 				activeclass: "tabnumber_activeclass",
 				rules: [0]
 			}, setting);
-			var property_data = $.extend({}, this.tabnumber.default.property, this.tabnumber.default.callbacks, param);
-
+			//ie pro
+			//default关键字在ie里有问题
+			//var property_data = $.extend(true,{}, this.tabnumber.default.property, this.tabnumber.default.callbacks, param);
+			var property_data = $.extend(true,{},this.tabnumber.defaults.property,this.tabnumber.defaults.callbacks,param);
 			this.each(function(i) {
 				$.data(this, 'tabnumber', property_data);
 			});
@@ -26,11 +28,11 @@
 
 		}
 	};
-	$.fn.tabnumber.default = {};
-	$.fn.tabnumber.default.property = {
+	$.fn.tabnumber.defaults = {};
+	$.fn.tabnumber.defaults.property = {
 		rules: [0]
 	};
-	$.fn.tabnumber.default.callbacks = {
+	$.fn.tabnumber.defaults.callbacks = {
 		onadd: function(item) {},
 		onclick: function(item) {},
 		onchange: function(item) {}
