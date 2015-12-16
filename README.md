@@ -13,11 +13,12 @@
 ```
 
 ## 文件说明
+----------------------------------------------------
 ### TAB
 ```js
 tabs.js
 ```
-主要使用了easyui的tab，但是为了适配业务逻辑扩展了以下方法：
+__主要使用了`easyui`的`tab`，但是为了适配业务逻辑扩展了以下方法：__
 ```js
 1.- [get_content]: 用于根据tab索引获得tab对象
 2.- [add_content]: 增加tab项目的主要方法，根据需要扩展下列参数：
@@ -40,8 +41,70 @@ tabs.js
 6.- [close_all]:关闭所有tab
 7.- [update_validateRule]:更新索引tab的长度规则
 ```
+--------------------------------------------
 ### NUMBERBLOCK
 ```js
 numberblock.js
 ```
-
+__仿支付宝密码输入框，提供2个方法__
+```js
+1.- [number_input]初始化：
+	可以传入如下参数
+	{
+			render_To: "document",
+				inputsize: {
+					width: 29,
+					height: 7
+				},
+				inputenabled:false,
+				cursorenabled:false,
+				activeCssName: "active",
+				containerCSSName: "digital_Container",
+				digitalCssName: "digital",
+				centactiveCssName: "centeractive",
+				number_of_input: 6,
+				validator: function(charcode) {
+					return true;
+				}
+	}
+			inputsize:框大小
+			inputenabled：是否准许输入
+			cursorenabled:是否显示游标
+			activeCssName containerCSSName digitalCssName 激活，容器， 方格样式名
+			number_of_input：初始输入个数
+			validator：校验回调函数
+2.- [set_number_of_container]：设置输入数量
+```
+-----------------------------------
+### TABNUMBER
+```js
+tabnumber.js
+```
+__依赖于上一个控件，针对业务逻辑在NUMBERBLOCK基础上编写__
+```js
+1.- [tabnumber]：初始化：
+------------------------------------
+					$('#numberblock').tabnumber({
+						rules: [],
+						width: 400,
+						onclick: function(e) {},
+						onupdate: function(e) {}
+					});
+					rules表示规则数组
+------------------------------------
+2.- [add_Item]:增加条目，可以指定索引与规则
+3.- [remove_Item]:移除索引条目，默认为最后一个
+4.- [set_active]:设置某索引获得
+5.- [get_selected]:获得当前选择
+6.- [clear_all]:清除所有段
+7.- [get_length]:获得总段数
+8.- [get_rule]:获得某索引规则
+9.- [get_rules]:获得所有规则，得到规则数组
+```
+--------------------------------------
+### TREE
+```js
+tree.js
+```
+__依赖于`TABNUMBER`，`TAB`,针对业务逻辑在`easyui`的tree的基础上扩写__
+```js
