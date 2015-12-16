@@ -2,38 +2,31 @@
 <html>
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html>
-
 	<head>
+		<title><%= title %></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="keywords" content="jquery,ui,easy,easyui,web">
-		<meta name="description" content="easyui help you build your web page easily!">
-
 		<link rel="stylesheet" type="text/css" href="css/easyui.css">
 		<link rel="stylesheet" type="text/css" href="css/icons.css">
-		<link rel="stylesheet" type="text/css" href="css/numberinput.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
 	<body>
-		<div class="easyui-layout" style="width:100%;height:550px;">
-			<div data-options="region:'west'" title="rule_tree" style="width:30%;padding:10px">
-				<div class="easyui-panel" style="padding:5px">
+		<div id="global" class="easyui-layout">
+			<div id="treerule" data-options="region:'west'" title="规则树">
+				<div class="easyui-panel">
 					<ul id="tt" class="easyui-tree" ></ul>
-					<div id="mm" class="easyui-menu" style="width:120px;">
-						<div data-options="iconCls:'icon-add'">
-							
+					<div id="mm" class="easyui-menu">
+						<div data-options="iconCls:'icon-add'">							
 							<span>同一级增加</span>
-							<div style="width: 150px;">
-								
+							<div class="contextmenu_bar">								
 									<div id="append_slingber_class">类别</div>
-									<div id="append_slingber">规则</div>								
-								
+									<div id="append_slingber">规则</div>																
 							</div>
 						</div>
 						<div data-options="iconCls:'icon-add'">							
 							<span>下一级增加</span>
-							<div style="width: 150px;">
+							<div class="contextmenu_bar">
 								<div id="append_class">类别</div>
-								<div id="append">规则</div>
-								
+								<div id="append">规则</div>								
 							</div>
 						</div>
 						<div id="removeit" data-options="iconCls:'icon-remove'">移除</div>
@@ -42,22 +35,20 @@
 						<div id="collapse">收缩</div>
 					</div>
 				</div>
-
 			</div>
-
 			<div data-options="region:'center'" title="">
 				<div class="easyui-layout" data-options="fit:true">
 					<div data-options="region:'north',fit:true" id="number_content">
-						<div style="height: 400px; width: 100%;" class="easyui-panel" title="test" data-options="iconCls:'icon-help',closable:false,tools:'#tt1',toolPosition:'left'">
+						<div id="blockpanel" style="width: 100%;" class="easyui-panel" title="规则制定" data-options="closable:false,tools:'#tt1',toolPosition:'left'">
 							<div id="tt1">
-								<a href="javascript:void(0)" class="icon-add" id="add_btn" style="margin-left: 20px;"></a>
-								<a href="javascript:void(0)" class="icon-remove" id="delete_btn" style="margin-left: 20px;"></a>
+								<a href="javascript:void(0)" title="增加一段" class="icon-add easyui-tooltip" id="add_btn"></a>
+								<a href="javascript:void(0)" title="删除尾段" class="icon-remove easyui-tooltip" id="delete_btn"></a>
 							</div>
-							<div id="test1234" class="clearfix"></div>
+							<div id="numberblock" class="clearfix"></div>
 						</div>
 					</div>
-					<div data-options="region:'south'" split="true" border="true" style="height:380px;">
-						<div id="table_tab" class="easyui-tabs" style="width:100%;height:370px"></div>					
+					<div id="tableregion" data-options="region:'south'" split="true" border="true">
+						<div id="table_tab" class="easyui-tabs"></div>					
 					</div>										
 				</div>
 			</div>				

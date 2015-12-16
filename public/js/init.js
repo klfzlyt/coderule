@@ -22,7 +22,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		e.stopPropagation();
 		if ($('#tt').tree('getSelected').isClass) return;
-		$('#test1234').tabnumber('add_Item', {});
+		$('#numberblock').tabnumber('add_Item', {});
 		$('#table_tab').tabs('add_content', {
 			content: $tab_main,
 			closable: false,
@@ -46,18 +46,18 @@ $(document).ready(function(){
 		e.preventDefault();
 		e.stopPropagation();
 		if ($('#tt').tree('getSelected').isClass) return;
-		var length = $('#test1234').tabnumber('get_length', {});
-		$('#test1234').tabnumber('remove_Item', {});
+		var length = $('#numberblock').tabnumber('get_length', {});
+		$('#numberblock').tabnumber('remove_Item', {});
 		$('#table_tab').tabs('close', length - 1);
 	});
-	$('#test1234').tabnumber({
+	$('#numberblock').tabnumber({
 		rules: [],
 		width: 400,
 		onclick: function(e) {
 			//	console.log("tabnumber on click: ",e);
 			$('#table_tab').tabs('select', e);
 			// selected_Index=e;
-			$('#test1234').data('tabnumber').selected_Index = e;
+			$('#numberblock').data('tabnumber').selected_Index = e;
 		},
 		onupdate: function(e) {
 			var setting = {};
@@ -73,8 +73,8 @@ $(document).ready(function(){
 		onSelect: function(title, index12) {
 			//console.log('tab on Select');
 			//	selected_Index=index12;
-			$('#test1234').data('tabnumber').selected_Index = index12;
-			$('#test1234').tabnumber('set_active', {
+			$('#numberblock').data('tabnumber').selected_Index = index12;
+			$('#numberblock').tabnumber('set_active', {
 				index: index12,
 				raise_event: false
 			});

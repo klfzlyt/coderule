@@ -267,7 +267,7 @@
 		dnd: false,
 		lines: true,
 		tabs: $('#table_tab'),
-		input_number: $('#test1234'),
+		input_number: $('#numberblock'),
 		currentnode: {},
 		lastselect_node: {},
 		onContextMenu: function(e, node) {
@@ -428,6 +428,13 @@
 		update_node: function(ob, param) {
 			var node = param.node;
 			var callback = param.callback || function() {};
+			var isEmptyObject=function( obj ) { 
+			for ( var name in obj ) { 
+			return false; 
+			} 
+			return true; 
+			};
+			if(isEmptyObject(node))return;
 			//如果没有rule return 有rule的话一定是[]
 			//	if (!node.rule) return;		
 			if (node === null) {

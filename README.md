@@ -1,21 +1,10 @@
 
 
-# coderule
+# 编码规则制定
 
+主要使用easyui+Node.js+mongodb搭建
 
-
-## Usage
-
-
-
-## Developing
-
-
-
-### Tools
-
-Created with [Nodeclipse](https://github.com/Nodeclipse/nodeclipse-1)
- ([Eclipse Marketplace](http://marketplace.eclipse.org/content/nodeclipse), [site](http://www.nodeclipse.org))   
-
-Nodeclipse is free open-source project that grows with your contributions.
-# test
+###运行方式
+进入项目文件夹
+1.npm install
+2.node app.js(或是使用pm2等管理工具)
