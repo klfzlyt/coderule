@@ -1,13 +1,14 @@
 
 
-# 编码规则制定
+# 编码规则制定工具
 
-主要使用easyui+Node.js+mongodb搭建
+使用easyui+Node.js+mongodb 进行前后端搭建
 - [示例地址](http://114.215.239.151:3000): `pm2`
-
+兼容IE8+ Chrome Firefox
 ##运行方式
 进入项目文件夹
 ```javascript
+需装有node环境和mongodb数据库
 1. npm install
 2. node app.js(或是使用pm2等管理工具)
 ```
@@ -108,3 +109,9 @@ tree.js
 ```
 __依赖于`TABNUMBER`，`TAB`,针对业务逻辑在`easyui`的tree的基础上扩写__
 ```js
+1.- [onSelect_old: function(oldnode, newnode)]：扩写原生事件，事件中能拿到新选中节点，和上次选中节点。在此事件中做了大量操作 __核心函数__
+2.- [getparents]:废弃，有bug
+3.- [getparents_new]:获得某个节点的父元素，以数组返回
+4.- [get_json_str]:获得整棵树的json字符串
+5.- [update_node]:更新节点信息，__核心函数__
+```
