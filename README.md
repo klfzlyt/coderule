@@ -17,10 +17,9 @@
 tabs.js
 ```
 主要使用了easyui的tab，但是为了适配业务逻辑扩展了以下方法：
-
-`get_content` 用于根据tab索引获得tab对象
-`add_content` 增加tab项目的主要方法，根据需要扩展下列参数：
 ```js
+`get_content` 用于根据tab索引获得tab对象
+`add_content` 增加tab项目的主要方法，根据需要扩展下列参数：<br>
 			{	
 				content: '',
 				index: indexx,
@@ -33,5 +32,6 @@ tabs.js
 			}
 			`content`为tab内容的html字符串，
 			`datavalidate`为段的验证规则
+			data为tab内的规则数据
 ```
 
