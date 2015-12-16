@@ -72,7 +72,7 @@ __仿支付宝密码输入框，提供2个方法__
 					return true;
 				}
 	}
-			* inputsize:框大小
+			inputsize:框大小
 			inputenabled：是否准许输入
 			cursorenabled:是否显示游标
 			activeCssName containerCSSName digitalCssName 激活，容器， 方格样式名
@@ -118,4 +118,90 @@ __依赖于`TABNUMBER`，`TAB`,针对业务逻辑在`easyui`的tree的基础上�
 3.- [getparents_new]:获得某个节点的父元素，以数组返回
 4.- [get_json_str]:获得整棵树的json字符串
 5.- [update_node]:更新节点信息，__核心函数__
+```
+## 前端运行过程
+最开始的是树的加载过程，需要ajax获得如下JSON格式数据，进行树的初始化
+```js
+[
+    {
+        "id": "5666ed348a10380011000001",
+        "text": "01",
+        "rule": [],
+        "isClass": true,
+        "children": [
+            {
+                "id": 11,
+                "text": "11",
+                "isClass": false,
+                "rule": [
+                    {
+                        "name": "fix",
+                        "data": {
+                            "name": "fixname",
+                            "length": 2,
+                            "content": {
+                                "value": "GB"
+                            },
+                            "backup": "backup1"
+                        }
+                    },
+                    {
+                        "name": "dic",
+                        "data": {
+                            "name": "dicname",
+                            "length": 3,
+                            "content": {
+                                "value": [
+                                    {
+                                        "key": "1~",
+                                        "value": "2~"
+                                    },
+                                    {
+                                        "key": "11~",
+                                        "value": "22~"
+                                    }
+                                ]
+                            },
+                            "backup": "backup1"
+                        }
+                    },
+                    {
+                        "name": "flu",
+                        "data": {
+                            "name": "fluname",
+                            "length": 2,
+                            "content": {
+                                "value": {
+                                    "type": "nubmer",
+                                    "content": "32131"
+                                }
+                            },
+                            "backup": "backup1"
+                        }
+                    }
+                ],
+                "children": []
+            },
+            {
+                "id": 112,
+                "text": "111111",
+                "isClass": false,
+                "rule": [
+                    {
+                        "name": "fix",
+                        "data": {
+                            "name": "fix1name",
+                            "length": 2,
+                            "content": {
+                                "value": "GB111"
+                            },
+                            "backup": "backup1"
+                        }
+                    }
+                ],
+                "children": []
+            }
+        ]
+    }
+]
 ```
