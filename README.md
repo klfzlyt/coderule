@@ -72,7 +72,7 @@ __仿支付宝密码输入框，提供2个方法__
 					return true;
 				}
 	}
-			inputsize:框大小
+			* inputsize:框大小
 			inputenabled：是否准许输入
 			cursorenabled:是否显示游标
 			activeCssName containerCSSName digitalCssName 激活，容器， 方格样式名
