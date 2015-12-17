@@ -345,11 +345,11 @@ app.get('/getall.json',ruleClass_route.getClassRuleJSON);//获得树信息
 
 ## 后端说明
 ----------------------------------------------------
-后端使用express（3.x）和mongodb
-主要结构
+后端使用express（3.x）和mongodb<br>
+文件夹主要结构
 >coderule
 >>routes————路由<br>
->>data----------数据访问层
+>>data————————数据访问层
 
 使用async异步控制
 使用了三个mongodb集合：
