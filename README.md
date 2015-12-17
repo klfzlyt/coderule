@@ -345,7 +345,7 @@ app.get('/getall.json',ruleClass_route.getClassRuleJSON);//获得树信息
 
 ## 后端说明
 ----------------------------------------------------
-后端使用express和mongodb
+后端使用express（3.x）和mongodb
 主要结构
 >coderule
 >>routes————路由<br>
