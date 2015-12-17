@@ -17,7 +17,7 @@
 2. node app.js(或是使用pm2等管理工具)
 ```
 
-## 前端文件说明(coderule/public/js/)
+## 前端说明(coderule/public/js/)
 ----------------------------------------------------
 ### TAB
 ```js
@@ -217,6 +217,7 @@ __依赖于`TABNUMBER`，`TAB`,针对业务逻辑在`easyui`的tree的基础上�
 当点击某个节点时，触发`onSelect_old`事件，事件中主要是:<br>
 		1.更新上次选中节点信息<br>
 		2.重新渲染当前选中节点的规则<br>
+		
 ### 接口说明:
 ```js
 app.put('/addclass',class_route.createClass);
@@ -317,13 +318,14 @@ app.get('/getall.json',ruleClass_route.getClassRuleJSON);
 主要是页面一开始加载时提供JSON数据的接口，__只在页面初始加载时进行查的方法调用__前端会记录用户操作记录，不用每次去后端查
 
  **Note:  所有的与后端交互的方法都在tree.js一个文件中 **
- 
+ ----------------------------------------------------
 
 ## 后端说明
+----------------------------------------------------
 后端使用express和mongodb
 主要结构
 >coderule
->>routes————路由
+>>routes————路由<br>
 >>data----------数据访问层
 
 使用async异步控制
@@ -333,3 +335,5 @@ app.get('/getall.json',ruleClass_route.getClassRuleJSON);
  2. data:段集合
  3. regulation:规则集合
 
+这种表结构对`增``删``改`都比较容易
+对查询的操作需要从一个二维数组都构造多颗树(** 前端树不止一颗**)
