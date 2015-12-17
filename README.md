@@ -239,7 +239,7 @@ $('#tree').tabs('update_node',{node:xxxx});
 树加载上述数据成功以后，会渲染出树，其中选中的树节点的规则已经加载好。<br>
 当点击某个节点时，触发`onSelect_old`事件，事件中主要是:<br>
 		1.更新上次选中节点信息<br>
-		2.重新渲染当前选中节点的规则<br>
+		2.重新渲染当前选中节点的规则(先清除所有，再根据当前节点信息重新创建规则段)<br>
 		
 ### 接口说明:
 ```js
@@ -354,7 +354,8 @@ app.get('/getall.json',ruleClass_route.getClassRuleJSON);//获得树信息
 使用async异步控制
 使用了三个mongodb集合：
 
- 1. **class**:(类集合)<br>
+ 1. **class**:(类集合结构)<br>
+ 主要带有一个parents_id数组
   ![image](https://github.com/klfzlyt/picrepo/raw/master/class.PNG)
 		  <br>保存父元素数组
  <br>
@@ -364,7 +365,8 @@ app.get('/getall.json',ruleClass_route.getClassRuleJSON);//获得树信息
 ----------
 
 
- 2. **data**:(段集合)<br>
+ 2. **data**:(段集合结构)<br>
+ data作为一个object，其content根据属性不同结构不同
   ![image](https://github.com/klfzlyt/picrepo/raw/master/data.PNG)
 		 <br>这个集合保存的是rule规则，规则的保存跟前端rule的JSON一模一样
  <br>
@@ -373,7 +375,8 @@ app.get('/getall.json',ruleClass_route.getClassRuleJSON);//获得树信息
 ----------
 
 
- 3. **regulation**:(规则集合)<br>
+ 3. **regulation**:(规则集合结构)<br>
+ 有2个数组，一个是parents_id，一个是规则id
  ![image](https://github.com/klfzlyt/picrepo/raw/master/regulation.PNG)
 		 <br>保存父元素数组与规则id数组<br>
  <br>
