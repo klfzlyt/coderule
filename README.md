@@ -25,6 +25,11 @@ tabs.js
 ```
 __主要使用了`easyui`的`tab`，但是为了适配业务逻辑扩展了以下方法：__
 ```js
+**调用方式：
+
+$('#tab').tabs('add_content',{data:xxx});
+
+**
 1.- [get_content]: 用于根据tab索引获得tab对象
 2.- [add_content]: 增加tab项目的主要方法，根据需要扩展下列参数：
 			{	
@@ -40,11 +45,19 @@ __主要使用了`easyui`的`tab`，但是为了适配业务逻辑扩展了以�
 			`content`为tab内容的html字符串，
 			`datavalidate`为段的验证规则
 			`data`为tab内的规则数据
+关于tab内容的说明：
+tab内容单独为一HTML文件：tabcontent.html
+add_content方法的content的参数为读取tabcontent.html的字符串
+每次添加tab内容都是利用tabcontent.html模板，但由于为了区别各tab页内容
+对tabcontent.html内的内容的所有ID进行了替换，以保障每个tab页的id属性是全局
+唯一的：
+string_html = string_html.replace(/id="(\w+)"|id='(\w+)'/g, 'id="$1_' + param.index + '"');
+string_html = string_html.replace(/#([0-9A-Za-z_]+)/g, '#$1_' + param.index);
 3.- [get_length]:获得tab长度
-4.- [get_rules]:获得整个tab的规则数组
-5.- [get_rule]:获得某个tab索引的规则
+4.- [get_rules]:获得整个tab的规则数组,无传入参数
+5.- [get_rule]:获得某个tab索引的规则，传入{index:x}
 6.- [close_all]:关闭所有tab
-7.- [update_validateRule]:更新索引tab的长度规则
+7.- [update_validateRule]:更新索引tab的长度规则 传入{index:x,val:xx}
 ```
 --------------------------------------------
 ### NUMBERBLOCK
@@ -87,6 +100,11 @@ tabnumber.js
 ```
 __依赖于上一个控件，针对业务逻辑在NUMBERBLOCK基础上编写__
 ```js
+**调用方式：
+
+$('#numberblock').tabnumber('add_Item',{length:xxxx});
+
+**
 1.- [tabnumber]：初始化：
 ------------------------------------
 					$('#numberblock').tabnumber({
@@ -97,14 +115,14 @@ __依赖于上一个控件，针对业务逻辑在NUMBERBLOCK基础上编写__
 					});
 					rules表示规则数组
 ------------------------------------
-2.- [add_Item]:增加条目，可以指定索引与规则
-3.- [remove_Item]:移除索引条目，默认为最后一个
-4.- [set_active]:设置某索引获得
-5.- [get_selected]:获得当前选择
-6.- [clear_all]:清除所有段
-7.- [get_length]:获得总段数
-8.- [get_rule]:获得某索引规则
-9.- [get_rules]:获得所有规则，得到规则数组
+2.- [add_Item]:增加条目，可以指定索引与规则，默认为从尾部添加 入参:{index:x,length:x}
+3.- [remove_Item]:移除索引条目，默认为最后一个 入参：{index:x}
+4.- [set_active]:设置某索引获得 入参：{index:x,raise_event:false}
+5.- [get_selected]:获得当前选择，入参：none
+6.- [clear_all]:清除所有段 入参：none
+7.- [get_length]:获得总段数 入参：none
+8.- [get_rule]:获得某索引规则 传入{index:x}
+9.- [get_rules]:获得所有规则，得到规则数组,无入参
 ```
 --------------------------------------
 ### TREE
@@ -113,11 +131,16 @@ tree.js  注意：所有与后端交互都在此文件中！
 ```
 __依赖于`TABNUMBER`，`TAB`,针对业务逻辑在`easyui`的tree的基础上扩写__
 ```js
+**调用方式：
+
+$('#tree').tabs('update_node',{node:xxxx});
+
+**
 1.- [onSelect_old: function(oldnode, newnode)]：扩写原生事件，事件中能拿到新选中节点，和上次选中节点。在此事件中做了大量操作 【核心函数】
-2.- [getparents]:废弃，有bug
-3.- [getparents_new]:获得某个节点的父元素，以数组返回
+2.- [getparents]:废弃，有bug 
+3.- [getparents_new]:获得某个节点的父元素，以数组返回 入参：{node:xxx} 
 4.- [get_json_str]:获得整棵树的json字符串
-5.- [update_node]:更新节点信息，【核心函数】
+5.- [update_node]:更新节点信息，【核心函数】入参：{node:xxx,callback:更新回调}
 ```
 ## 前端运行过程
 最开始的是树的加载过程，需要ajax获得如下JSON格式数据，进行树的初始化
@@ -220,12 +243,12 @@ __依赖于`TABNUMBER`，`TAB`,针对业务逻辑在`easyui`的tree的基础上�
 		
 ### 接口说明:
 ```js
-app.put('/addclass',class_route.createClass);
-app.put('/addrule',rule_route.createRule);
-app.post('/updateclass',class_route.updateClass);
-app.post('/updaterule',rule_route.updateRule);
-app.post('/deleteNode',ruleClass_route.deleteNode);
-app.get('/getall.json',ruleClass_route.getClassRuleJSON);
+app.put('/addclass',class_route.createClass);//增加类别
+app.put('/addrule',rule_route.createRule);//增加规则
+app.post('/updateclass',class_route.updateClass);//修改类别
+app.post('/updaterule',rule_route.updateRule);//修改规则
+app.post('/deleteNode',ruleClass_route.deleteNode);//删除节点
+app.get('/getall.json',ruleClass_route.getClassRuleJSON);//获得树信息
 ```
 
 * `增`:`(有多个增加方法，增加类别与增加规则)`
