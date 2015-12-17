@@ -218,7 +218,7 @@ __依赖于`TABNUMBER`，`TAB`,针对业务逻辑在`easyui`的tree的基础上�
 1.更新上次选中节点信息
 2.重新渲染当前选中节点的规则
 ```html
-__接口说明：__
+接口说明:
 ```
 ```js
 app.put('/addclass',class_route.createClass);
