@@ -332,8 +332,12 @@ app.get('/getall.json',ruleClass_route.getClassRuleJSON);
 使用了三个mongodb集合，
 
  1. class:类集合
+  ![image](https://github.com/klfzlyt/picrepo/raw/master/class.PNG)<br>
  2. data:段集合
+  ![image](https://github.com/klfzlyt/picrepo/raw/master/data.PNG)<br>
  3. regulation:规则集合
+ ![image](https://github.com/klfzlyt/picrepo/raw/master/regulation.PNG)<br>
 
-这种表结构对`增``删``改`都比较容易
-对查询的操作需要从一个二维数组都构造多颗树(** 前端树不止一颗**)
+集合结构对`增``删``改`都比较容易<br>
+对`查询`的操作需要从一个二维数组都构造多颗树(** 前端树不止一颗**)
+
