@@ -335,10 +335,23 @@ app.get('/getall.json',ruleClass_route.getClassRuleJSON);
   ![image](https://github.com/klfzlyt/picrepo/raw/master/class.PNG)
 		  <br>保存父元素数组
  <br>
+
+
+----------
+
+
+----------
+
+
  2. **data**:(段集合)<br>
   ![image](https://github.com/klfzlyt/picrepo/raw/master/data.PNG)
 		 <br>这个集合保存的是rule规则，规则的保存跟前端rule的JSON一模一样
  <br>
+
+
+----------
+
+
  3. **regulation**:(规则集合)<br>
  ![image](https://github.com/klfzlyt/picrepo/raw/master/regulation.PNG)
 		 <br>保存父元素数组与规则id数组<br>
