@@ -208,17 +208,17 @@ __依赖于`TABNUMBER`，`TAB`,针对业务逻辑在`easyui`的tree的基础上�
 其中`id`是后端分配的，新创建一个节点的时候注意要发请求以便获得此id,其中数据中的对应如下：
 * `fix`=================>固定
 * `flu`=================>流水
-	[number]:数字型
-	[alphebat]:数字字母型
-	[date]:日期型
+		[number]:数字型
+		[alphebat]:数字字母型
+		[date]:日期型
 * `dic`=================>字典
 * `custom`==============>自定义
 树加载上述数据成功以后，会渲染出树，其中选中的树节点的规则已经加载好。
 当点击某个节点时，触发`onSelect_old`事件，事件中主要是:
 		1.更新上次选中节点信息
 		2.重新渲染当前选中节点的规则
-### 接口说明:
 
+### 接口说明:
 ```js
 app.put('/addclass',class_route.createClass);
 app.put('/addrule',rule_route.createRule);
