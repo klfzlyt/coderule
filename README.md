@@ -331,14 +331,17 @@ app.get('/getall.json',ruleClass_route.getClassRuleJSON);
 使用async异步控制
 使用了三个mongodb集合，
 
- 1. class:类集合
-  ![image](https://github.com/klfzlyt/picrepo/raw/master/class.PNG)<br>
+ 1. **class**:类集合<br>
+  ![image](https://github.com/klfzlyt/picrepo/raw/master/class.PNG)
+  保存父元素数组
   ----------------------------------------------------
- 2. data:段集合
-  ![image](https://github.com/klfzlyt/picrepo/raw/master/data.PNG)<br>
+ 2. **data**:段集合<br>
+  ![image](https://github.com/klfzlyt/picrepo/raw/master/data.PNG)
+ 这个集合保存的是rule规则，规则的保存跟前端rule的JSON一模一样
   ----------------------------------------------------
- 3. regulation:规则集合
- ![image](https://github.com/klfzlyt/picrepo/raw/master/regulation.PNG)<br>
+ 3. **regulation**:规则集合<br>
+ ![image](https://github.com/klfzlyt/picrepo/raw/master/regulation.PNG)
+ 保存父元素数组与规则id数组<br>
 
 集合结构对`增``删``改`都比较容易<br>
 对`查询`的操作需要从一个二维数组都构造多颗树(** 前端树不止一颗**)
