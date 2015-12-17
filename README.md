@@ -117,7 +117,7 @@ $('#numberblock').tabnumber('add_Item',{length:xxxx});
 ------------------------------------
 2.- [add_Item]:增加条目，可以指定索引与规则，默认为从尾部添加 入参:{index:x,length:x}
 3.- [remove_Item]:移除索引条目，默认为最后一个 入参：{index:x}
-4.- [set_active]:设置某索引获得 入参：{index:x,raise_event:false}
+4.- [set_active]:设索引项为激活 入参：{index:x,raise_event:false}
 5.- [get_selected]:获得当前选择，入参：none
 6.- [clear_all]:清除所有段 入参：none
 7.- [get_length]:获得总段数 入参：none
