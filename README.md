@@ -217,8 +217,18 @@ __依赖于`TABNUMBER`，`TAB`,针对业务逻辑在`easyui`的tree的基础上�
 当点击某个节点时，触发`onSelect_old`事件，事件中主要是
 1.更新上次选中节点信息
 2.重新渲染当前选中节点的规则
+-------------------------------------------------------
+### 接口说明：
+```js
+app.put('/addclass',class_route.createClass);
+app.put('/addrule',rule_route.createRule);
+app.post('/updateclass',class_route.updateClass);
+app.post('/updaterule',rule_route.updateRule);
+app.post('/deleteNode',ruleClass_route.deleteNode);
+app.get('/getall.json',ruleClass_route.getClassRuleJSON);
+```
 
-### 1.增(有多个增加方法，增加类别与增加规则)
+1.[增]:`(有多个增加方法，增加类别与增加规则)`
 ```js
 	function append() {
 		var t = $('#tt');
@@ -255,7 +265,7 @@ __依赖于`TABNUMBER`，`TAB`,针对业务逻辑在`easyui`的tree的基础上�
 	}
 ```
 
-### 2.删
+2.[删]:`删除类与规则都在一个方法中`
 ```js
 	function removeit() {
 		var t = $('#tt');
@@ -292,12 +302,14 @@ __依赖于`TABNUMBER`，`TAB`,针对业务逻辑在`easyui`的tree的基础上�
 	}
 ```
 
-### 3.改
+3.[改]:`更新类与规则都在一个方法中`
 ```js
 更行某个节点信息，直接调用`tree`的`update_node`方法。用户操作过程中会频繁调用此方法
 ```
 
-### 4.查
-主要是页面一开始加载时提供JSON数据的接口，___只在页面加载时进行查的方法调用___前端会记录用户操作记录，不用每次去后端查
+4.[查]:主要是后端
+主要是页面一开始加载时提供JSON数据的接口，___只在页面初始加载时进行查的方法调用___前端会记录用户操作记录，不用每次去后端查
 
  **Note:  所有的与后端交互的方法都在tree.js一个文件中 **
+ 
+
