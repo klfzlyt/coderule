@@ -333,8 +333,10 @@ app.get('/getall.json',ruleClass_route.getClassRuleJSON);
 
  1. class:类集合
   ![image](https://github.com/klfzlyt/picrepo/raw/master/class.PNG)<br>
+  ----------------------------------------------------
  2. data:段集合
   ![image](https://github.com/klfzlyt/picrepo/raw/master/data.PNG)<br>
+  ----------------------------------------------------
  3. regulation:规则集合
  ![image](https://github.com/klfzlyt/picrepo/raw/master/regulation.PNG)<br>
 
