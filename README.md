@@ -17,7 +17,7 @@
 2. node app.js(或是使用pm2等管理工具)
 ```
 
-## 前端文件说明
+## 前端文件说明(coderule/public/js/)
 ----------------------------------------------------
 ### TAB
 ```js
@@ -205,9 +205,94 @@ __依赖于`TABNUMBER`，`TAB`,针对业务逻辑在`easyui`的tree的基础上�
     }
 ]
 ```
-其中`id`是后端分配的，新创建一个节点的时候注意要发请求以便获得此id
+其中`id`是后端分配的，新创建一个节点的时候注意要发请求以便获得此id,其中数据中的对应如下：
 * `fix`=================>固定
 * `flu`=================>流水
 * `dic`=================>字典
 * `custom`==============>自定义
-树加载上述数据成功以后
+树加载上述数据成功以后，会渲染出树，其中选中的树节点的规则已经加载好。
+当点击某个节点时，触发`onSelect_old`事件，事件中主要是
+1.更新上次选中节点信息
+2.重新渲染当前选中节点的规则
+
+### 增(有多个增加方法，增加类别与增加规则)
+```js
+	function append() {
+		var t = $('#tt');
+		var node = t.tree('getSelected');
+		var parents_arr = $('#tt').tree('getparents_new', {
+			node: node
+		});
+		var result_temp = [];
+		for (var i = 0; i < parents_arr.length; i++) {
+			result_temp.push(parents_arr[i].id)
+		}
+		result_temp.push(node.id);
+		var thisnode = {};
+		thisnode.depth = result_temp.length + 1;
+		thisnode.name = '新规则';
+		thisnode.parents_id = result_temp;
+		thisnode.rule = [];
+		var jstr = JSON.stringify(thisnode);
+		put_method('/addrule', jstr, function(str) {
+			t.tree('append', {
+				parent: (node ? node.target : null),
+				data: [{
+					id: str,
+					text: '新规则',
+					rule: [],
+					isClass: false,
+					children: []
+				}]
+			});
+			t.tree('update_node', {
+				node: node
+			});
+		});
+	}
+```
+
+### 删
+```js
+	function removeit() {
+		var t = $('#tt');
+		var node = t.tree('getSelected');
+		if (node.children.length != 0) {
+			$.messager.alert('注意', '存在子节点，不能移除！', 'info');
+			return;
+		}
+		$.messager.confirm('注意', '是否要移除此节点?', function(r) {
+			if (r) {
+				var _temp = $.extend(true, {}, node);
+				_temp.target = undefined;
+				var nodestr = JSON.stringify(_temp);
+				post_method('/deleteNode', nodestr, function(res) {
+					if (res === 'ok') {
+						var temp = node.target;
+						var parent = t.tree('getParent', temp);
+						$('#tt').tree('remove', temp);
+						if (parent && parent.isClass) {
+							t.tree('update_node', {
+								node: parent
+							});
+						}
+						var tab = t.data('tree').options.tabs;
+						var input_number = t.data('tree').options.input_number;
+						tab.tabs('close_all');
+						input_number.tabnumber('clear_all');
+					}
+				});
+			} else {
+				//do nothing
+			}
+		});
+	}
+```
+
+### 改
+```js
+更行某个节点信息，直接调用`tree`的`update_node`方法
+```
+
+### 查
+主要是页面一开始加载时提供JSON数据的接口，___只在页面加载时进行查的方法调用___前端会记录用户操作记录，不用每次去后端查
