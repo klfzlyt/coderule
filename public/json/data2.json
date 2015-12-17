@@ -3,7 +3,6 @@
 	"text":"01",
 	"rule":[],
 	"isClass":true,
-	"iconCls":"icon-file",
 	"children":[
 	{
 		"id":11,
@@ -12,45 +11,38 @@
 		"rule":[{
 			"name":"fix",
 			"data":{
+				"name":"fixname",
 				"length":2,
 				"content":{
 					"value":"GB"
-				}
+				},
+				"backup":"backup1"
 			}
 		},{
 			"name":"dic",
 			"data":{
+				"name":"dicname",
 				"length":3,
-				"content":{
-				
+				"content":{					
 					"value":[
 						{"key":"1~","value":"2~"},
-						{"key":"11~","value":"22~"}
-					
-					
-					]
-				
-				}
-			
-			}
-		
+						{"key":"11~","value":"22~"}										
+					]				
+				},
+				"backup":"backup1"			
+			}		
 		},{
 			"name":"flu",
 			"data":{
+				"name":"fluname",
 				"length":2,
-				"content":{
-			
+				"content":{			
 					"value":{
 						"type":"nubmer",
-						"content":"32131"
-					
+						"content":"32131"					
 					}
-				
-				
-				
-				}
-			
-			
+				},
+				"backup":"backup1"						
 			}
 		
 		}],
@@ -63,64 +55,16 @@
 		"rule":[{
 			"name":"fix",
 			"data":{
+				"name":"fix1name",
 				"length":2,
 				"content":{
 					
 					"value":"GB111"
-				}
+				},
+				"backup":"backup1"			
 			}
-		},{
-			"name":"dic",
-			"data":{
-				"length":4,
-				"content":{
-					
-					"value":[
-						{"key":"1~11","value":"2~"},
-						{"key":"11~11","value":"22~"}
-					
-					
-					]
-				
-				}
-			
-			}
-		
-		},{
-			"name":"flu",
-			"data":{
-				"length":8,
-				"content":{
-				
-					"value":{
-						"type":"nubmer",
-						"content":"32111131"
-					
-					}
-				
-				
-				
-				}
-			
-			
-			}
-		
 		}],
 		"children":[]
 	}
-	
-	
 	]
-
-}
-
-
-
-
-
-
-
-
-
-
-]
+}]

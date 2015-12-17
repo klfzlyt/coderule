@@ -166,7 +166,6 @@
 		});
 		var result_temp = [];
 		for (var i = 0; i < parents_arr.length; i++) {
-
 			result_temp.push(parents_arr[i].id)
 		}
 		result_temp.push(node.id);
@@ -191,7 +190,6 @@
 				node: node
 			});
 		});
-
 	}
 	$('#removeit').bind('click', function(e) {
 		e.stopPropagation();
