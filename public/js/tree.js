@@ -311,8 +311,6 @@
 		},
 		onUpdate_rule: function(node) {
 			var rule = node.rule;
-			//TODO
-			//想办法给node.rule增加一些新的值
 		},
 		//pram:oldnode 上次选中的node
 		//pram:newnode 本次选中的node
