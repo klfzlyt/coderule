@@ -113,11 +113,11 @@ tree.js  注意：所有与后端交互都在此文件中！
 ```
 __依赖于`TABNUMBER`，`TAB`,针对业务逻辑在`easyui`的tree的基础上扩写__
 ```js
-1.- [onSelect_old: function(oldnode, newnode)]：扩写原生事件，事件中能拿到新选中节点，和上次选中节点。在此事件中做了大量操作 __核心函数__
+1.- [onSelect_old: function(oldnode, newnode)]：扩写原生事件，事件中能拿到新选中节点，和上次选中节点。在此事件中做了大量操作 【核心函数】
 2.- [getparents]:废弃，有bug
 3.- [getparents_new]:获得某个节点的父元素，以数组返回
 4.- [get_json_str]:获得整棵树的json字符串
-5.- [update_node]:更新节点信息，__核心函数__
+5.- [update_node]:更新节点信息，【核心函数】
 ```
 ## 前端运行过程
 最开始的是树的加载过程，需要ajax获得如下JSON格式数据，进行树的初始化
@@ -329,15 +329,13 @@ app.get('/getall.json',ruleClass_route.getClassRuleJSON);
 >>data----------数据访问层
 
 使用async异步控制
-使用了三个mongodb集合，
+使用了三个mongodb集合：
 
  1. **class**:(类集合)<br>
   ![image](https://github.com/klfzlyt/picrepo/raw/master/class.PNG)
 		  <br>保存父元素数组
  <br>
-
-
-----------
+ 
 
 
 ----------
@@ -358,5 +356,7 @@ app.get('/getall.json',ruleClass_route.getClassRuleJSON);
  <br>
 集合结构对`增``删``改`都比较容易<br>
 对`查询`的操作需要从一个二维数组都构造多颗树(** 前端树不止一颗**)<br>
-构成一个前端能识别的JSON串，推给前端
-
+构成一个前端能识别的JSON串，推给前端，主要代码在
+```js
+calss_rule_get.js 中
+```
